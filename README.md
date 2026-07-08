@@ -19,7 +19,6 @@ DigitalNurture_AbhiRam/
 ├── README.md
 ├── LICENSE
 ├── Module-1-DesignPatterns/
-│   ├── Exercises/
 │   ├── Solutions/
 │   │   ├── Singleton/
 │   │   ├── FactoryMethod/
@@ -32,7 +31,6 @@ DigitalNurture_AbhiRam/
 │   │   └── Command/
 │   └── Screenshots/
 ├── Module-2-DSA/
-│   ├── Exercises/
 │   ├── Solutions/
 │   │   ├── Arrays/
 │   │   └── LinkedList/
@@ -41,12 +39,13 @@ DigitalNurture_AbhiRam/
 │   ├── Scripts/
 │   ├── Output/
 │   └── README/
-├── Module-4-TDD/
-│   ├── JUnit/
-│   ├── Mockito/
-│   ├── Logging/
-│   ├── Lombok/
-│   └── README/
+├── Module-4-TDD-Logging/
+│   ├── Solutions/
+│   │   ├── JUnit/
+│   │   ├── Mockito/
+│   │   ├── Logging/
+│   │   └── Lombok/
+│   └── Screenshots/
 └── Resources/
     ├── Notes/
     ├── LearningLinks/
@@ -95,7 +94,7 @@ Focuses on Java-based implementation of standard search, sort, traversal algorit
 ### [Module 3: PLSQL Programming](./Module-3-PLSQL/)
 Consists of standard PL/SQL exercises including Variables, Loops, Case-structures, Custom Exception Handling, Cursor management, Stored Procedures, Functions, Packages, and Triggers.
 
-### [Module 4: Test Driven Development & Logging](./Module-4-TDD/)
+### [Module 4: Test Driven Development & Logging](./Module-4-TDD-Logging/)
 Showcases best practices in Unit Testing, Mocking, and Logging across 4 separate Maven projects:
 - **JUnit**: Asserts, AAA Pattern, Parameterized tests.
 - **Mockito**: Mocking Repository & REST API layers.
@@ -120,7 +119,7 @@ Connect to your local Oracle SQL database instance and run the script:
 ```
 
 ### Running TDD Maven Tests (Module 4)
-From the specific project directory (`JUnit/`, `Mockito/`, `Logging/`, or `Lombok/`), run:
+From the specific project directory (`Solutions/JUnit/`, `Solutions/Mockito/`, `Solutions/Logging/`, or `Solutions/Lombok/`), run:
 ```bash
 mvn clean test
 ```
