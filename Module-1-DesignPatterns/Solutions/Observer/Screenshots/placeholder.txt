@@ -1,0 +1,2 @@
+Please save the console output screenshot of Observer Main run here.
+Expected output log matches the text inside README.md under Example Output.

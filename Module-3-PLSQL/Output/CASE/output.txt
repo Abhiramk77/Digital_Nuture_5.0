@@ -1,0 +1,6 @@
+SQL> @Scripts/CASE/CASE.sql;
+Department : Engineering
+Location   : San Francisco
+Region     : West Coast Region
+
+PL/SQL procedure successfully completed.

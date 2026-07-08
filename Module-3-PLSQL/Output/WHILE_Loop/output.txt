@@ -1,0 +1,5 @@
+SQL> @Scripts/WHILE_Loop/WHILE_Loop.sql;
+Calculating 5! using WHILE Loop...
+Result (5!): 120
+
+PL/SQL procedure successfully completed.
