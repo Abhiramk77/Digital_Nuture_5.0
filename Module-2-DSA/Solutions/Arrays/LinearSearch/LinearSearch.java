@@ -1,22 +1,13 @@
 package com.digitalnurture.dsa.arrays.linearsearch;
 
-/**
- * Linear Search implementation in Java.
- * Sequentially checks each element of the list until a match is found.
- */
 public class LinearSearch {
-
-    /**
-     * Searches for a target key in the array.
-     * @return index of target key if found, otherwise -1.
-     */
     public int search(int[] arr, int key) {
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] == key) {
-                return i; // Key found at index i
+                return i;
             }
         }
-        return -1; // Key not found
+        return -1;
     }
 
     public static void main(String[] args) {

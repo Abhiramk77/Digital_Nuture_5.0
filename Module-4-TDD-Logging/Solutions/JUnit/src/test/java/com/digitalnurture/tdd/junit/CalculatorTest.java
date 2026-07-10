@@ -9,11 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * JUnit 5 test class for Calculator.
- */
 class CalculatorTest {
-
     private Calculator calculator;
 
     @BeforeEach
@@ -37,8 +33,7 @@ class CalculatorTest {
     @DisplayName("Test division validation")
     void testDivide() {
         assertEquals(2.5, calculator.divide(5, 2), "5 / 2 should equal 2.5");
-        
-        // Asserting exception thrown
+
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             calculator.divide(10, 0);
         });

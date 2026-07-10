@@ -1,8 +1,5 @@
 package com.digitalnurture.designpatterns.observer;
 
-/**
- * Concrete Observer representing a Mobile Application.
- */
 public class MobileAppObserver implements Observer {
     private final String clientName;
 

@@ -1,37 +1,26 @@
 package com.digitalnurture.dsa.arrays.binarysearch;
 
-/**
- * Binary Search implementation in Java.
- * Performs search on a sorted array by dividing search intervals in half.
- */
 public class BinarySearch {
-
-    /**
-     * Binary Search implementation using iterative approach.
-     * @return index of key if found, otherwise -1.
-     */
     public int search(int[] sortedArr, int key) {
         int low = 0;
         int high = sortedArr.length - 1;
 
         while (low <= high) {
-            int mid = low + (high - low) / 2; // Prevents overflow
+            int mid = low + (high - low) / 2;
 
-            // Check if key is present at mid
             if (sortedArr[mid] == key) {
                 return mid;
             }
 
-            // If key greater, ignore left half
             if (sortedArr[mid] < key) {
                 low = mid + 1;
             }
-            // If key is smaller, ignore right half
+
             else {
                 high = mid - 1;
             }
         }
-        return -1; // Element not found
+        return -1;
     }
 
     public static void main(String[] args) {

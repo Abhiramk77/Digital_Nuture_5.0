@@ -6,11 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Test class to run and verify OrderProcessor logging operations.
- */
 class OrderProcessorTest {
-
     private OrderProcessor processor;
 
     @BeforeEach

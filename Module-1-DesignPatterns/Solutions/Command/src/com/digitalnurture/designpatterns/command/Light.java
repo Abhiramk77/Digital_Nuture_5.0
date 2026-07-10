@@ -1,9 +1,5 @@
 package com.digitalnurture.designpatterns.command;
 
-/**
- * Receiver class.
- * Knows how to perform the operations associated with carrying out a request.
- */
 public class Light {
     private final String roomName;
 

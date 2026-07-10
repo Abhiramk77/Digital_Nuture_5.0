@@ -1,9 +1,5 @@
--- PL/SQL Stored Procedure Exercise
--- Creates a procedure to adjust an employee's salary and tests it.
-
 SET SERVEROUTPUT ON;
 
--- Create or Replace Stored Procedure
 CREATE OR REPLACE PROCEDURE adjust_salary (
     p_emp_id IN NUMBER,
     p_increment IN NUMBER
@@ -11,17 +7,15 @@ CREATE OR REPLACE PROCEDURE adjust_salary (
     v_old_salary NUMBER;
     v_new_salary NUMBER;
 BEGIN
-    -- Query old salary
+
     SELECT salary INTO v_old_salary
     FROM FSE_Employees
     WHERE employee_id = p_emp_id;
 
-    -- Perform update
     UPDATE FSE_Employees
     SET salary = salary + p_increment
     WHERE employee_id = p_emp_id;
 
-    -- Query new salary
     SELECT salary INTO v_new_salary
     FROM FSE_Employees
     WHERE employee_id = p_emp_id;
@@ -39,10 +33,9 @@ EXCEPTION
 END adjust_salary;
 /
 
--- Test execution block
 BEGIN
     DBMS_OUTPUT.PUT_LINE('--- Testing Stored Procedure adjust_salary ---');
-    adjust_salary(102, 5000); -- Increase John Doe's salary by 5,000
+    adjust_salary(102, 5000);
     COMMIT;
 END;
 /

@@ -1,14 +1,6 @@
 package com.digitalnurture.dsa.arrays.bubblesort;
 
-/**
- * Bubble Sort implementation in Java.
- * Repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order.
- */
 public class BubbleSort {
-
-    /**
-     * Sorts the array using Bubble Sort.
-     */
     public void sort(int[] arr) {
         int n = arr.length;
         boolean swapped;
@@ -16,14 +8,13 @@ public class BubbleSort {
             swapped = false;
             for (int j = 0; j < n - i - 1; j++) {
                 if (arr[j] > arr[j + 1]) {
-                    // Swap arr[j] and arr[j+1]
                     int temp = arr[j];
                     arr[j] = arr[j + 1];
                     arr[j + 1] = temp;
                     swapped = true;
                 }
             }
-            // If no elements were swapped in the inner loop, the array is already sorted
+
             if (!swapped) {
                 break;
             }

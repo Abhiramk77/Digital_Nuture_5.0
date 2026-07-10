@@ -1,6 +1,3 @@
--- PL/SQL FOR Loop Exercise
--- Demonstrates both numeric FOR loop and cursor FOR loop.
-
 SET SERVEROUTPUT ON;
 
 BEGIN

@@ -7,10 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-/**
- * EmployeeProfile model class demonstrating Lombok annotations.
- * Lombok automatically generates constructors, getters, setters, toString representation, and builder patterns.
- */
 @Getter
 @Setter
 @NoArgsConstructor

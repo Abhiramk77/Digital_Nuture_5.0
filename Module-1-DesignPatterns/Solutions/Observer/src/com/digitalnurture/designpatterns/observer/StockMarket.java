@@ -3,10 +3,6 @@ package com.digitalnurture.designpatterns.observer;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Concrete Subject implementing Subject.
- * Manages observers and triggers update calls upon state (stock price) changes.
- */
 public class StockMarket implements Subject {
     private final List<Observer> observers = new ArrayList<>();
     private String stockSymbol;
@@ -29,9 +25,6 @@ public class StockMarket implements Subject {
         }
     }
 
-    /**
-     * Updates the stock market price and notifies observers.
-     */
     public void setStockData(String stockSymbol, double price) {
         this.stockSymbol = stockSymbol;
         this.price = price;

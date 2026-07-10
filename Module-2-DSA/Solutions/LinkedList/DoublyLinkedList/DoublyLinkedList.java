@@ -1,14 +1,9 @@
 package com.digitalnurture.dsa.linkedlist.doubly;
 
-/**
- * Doubly Linked List implementation in Java.
- * Supports bi-directional traversal, insertion, and deletion.
- */
 public class DoublyLinkedList {
     private Node head;
     private Node tail;
 
-    // Node structure
     private static class Node {
         int data;
         Node next;
@@ -21,9 +16,6 @@ public class DoublyLinkedList {
         }
     }
 
-    /**
-     * Inserts a new node at the end.
-     */
     public void insert(int data) {
         Node newNode = new Node(data);
         if (head == null) {
@@ -36,29 +28,25 @@ public class DoublyLinkedList {
         tail = newNode;
     }
 
-    /**
-     * Deletes a node with target key.
-     */
     public void delete(int key) {
         Node temp = head;
 
         while (temp != null) {
             if (temp.data == key) {
-                // If node is head
                 if (temp == head) {
                     head = temp.next;
                     if (head != null) {
                         head.prev = null;
                     } else {
-                        tail = null; // List became empty
+                        tail = null;
                     }
                 }
-                // If node is tail
+
                 else if (temp == tail) {
                     tail = temp.prev;
                     tail.next = null;
                 }
-                // Middle node
+
                 else {
                     temp.prev.next = temp.next;
                     temp.next.prev = temp.prev;
@@ -69,9 +57,6 @@ public class DoublyLinkedList {
         }
     }
 
-    /**
-     * Forward traversal.
-     */
     public void traverseForward() {
         Node temp = head;
         System.out.print("Forward:  NULL <- ");
@@ -82,9 +67,6 @@ public class DoublyLinkedList {
         System.out.println(" -> NULL");
     }
 
-    /**
-     * Backward traversal.
-     */
     public void traverseBackward() {
         Node temp = tail;
         System.out.print("Backward: NULL <- ");

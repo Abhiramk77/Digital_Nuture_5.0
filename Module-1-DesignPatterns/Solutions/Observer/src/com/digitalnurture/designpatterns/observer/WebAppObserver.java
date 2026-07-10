@@ -1,8 +1,5 @@
 package com.digitalnurture.designpatterns.observer;
 
-/**
- * Concrete Observer representing a Web Dashboard.
- */
 public class WebAppObserver implements Observer {
     private final String dashboardId;
 

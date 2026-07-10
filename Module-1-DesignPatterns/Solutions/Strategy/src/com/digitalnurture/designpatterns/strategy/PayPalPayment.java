@@ -1,8 +1,5 @@
 package com.digitalnurture.designpatterns.strategy;
 
-/**
- * Concrete Strategy implementing PayPal payment logic.
- */
 public class PayPalPayment implements PaymentStrategy {
     private final String emailId;
     private final String password;

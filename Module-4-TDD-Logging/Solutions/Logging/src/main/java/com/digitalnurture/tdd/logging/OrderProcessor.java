@@ -3,9 +3,6 @@ package com.digitalnurture.tdd.logging;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * OrderProcessor class demonstrating SLF4J logging levels.
- */
 public class OrderProcessor {
     private static final Logger logger = LoggerFactory.getLogger(OrderProcessor.class);
 

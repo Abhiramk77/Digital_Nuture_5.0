@@ -1,8 +1,5 @@
 package com.digitalnurture.designpatterns.strategy;
 
-/**
- * Concrete Strategy implementing Credit Card payment logic.
- */
 public class CreditCardPayment implements PaymentStrategy {
     private final String name;
     private final String cardNumber;
@@ -18,7 +15,6 @@ public class CreditCardPayment implements PaymentStrategy {
 
     @Override
     public void pay(double amount) {
-        // Redact card number for security
         String maskedCard = "****-****-****-" + cardNumber.substring(cardNumber.length() - 4);
         System.out.println("Processing transaction of $" + amount + " using Credit Card (" + maskedCard + ") for cardholder: " + name);
     }

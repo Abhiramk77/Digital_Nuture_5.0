@@ -1,8 +1,5 @@
 package com.digitalnurture.designpatterns.decorator;
 
-/**
- * Concrete Decorator extending NotifierDecorator to add SMS capability.
- */
 public class SMSNotifierDecorator extends NotifierDecorator {
     public SMSNotifierDecorator(Notifier notifier) {
         super(notifier);
@@ -10,8 +7,8 @@ public class SMSNotifierDecorator extends NotifierDecorator {
 
     @Override
     public void send(String message) {
-        super.send(message); // Deliver base notification (e.g. Email)
-        sendSMS(message);    // Add SMS behavior
+        super.send(message);
+        sendSMS(message);
     }
 
     private void sendSMS(String message) {

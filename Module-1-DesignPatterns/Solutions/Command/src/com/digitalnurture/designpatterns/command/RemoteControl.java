@@ -1,9 +1,5 @@
 package com.digitalnurture.designpatterns.command;
 
-/**
- * Invoker class.
- * Asks the command to carry out the request.
- */
 public class RemoteControl {
     private Command command;
 

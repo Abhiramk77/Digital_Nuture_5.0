@@ -1,8 +1,5 @@
 package com.digitalnurture.designpatterns.decorator;
 
-/**
- * Concrete Decorator extending NotifierDecorator to add Slack capability.
- */
 public class SlackNotifierDecorator extends NotifierDecorator {
     public SlackNotifierDecorator(Notifier notifier) {
         super(notifier);
@@ -10,8 +7,8 @@ public class SlackNotifierDecorator extends NotifierDecorator {
 
     @Override
     public void send(String message) {
-        super.send(message); // Deliver base notification
-        sendSlackMessage(message); // Add Slack behavior
+        super.send(message);
+        sendSlackMessage(message);
     }
 
     private void sendSlackMessage(String message) {

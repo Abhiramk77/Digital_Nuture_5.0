@@ -1,6 +1,3 @@
--- PL/SQL Introduction Exercise
--- Enables server output and prints a basic confirmation message.
-
 SET SERVEROUTPUT ON;
 
 DECLARE

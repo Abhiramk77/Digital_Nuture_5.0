@@ -1,9 +1,5 @@
 package com.digitalnurture.designpatterns.decorator;
 
-/**
- * Base Decorator class.
- * Implements the component interface and delegates execution to the wrapped notifier.
- */
 public abstract class NotifierDecorator implements Notifier {
     protected Notifier wrappedNotifier;
 

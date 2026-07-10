@@ -1,6 +1,3 @@
--- PL/SQL WHILE Loop Exercise
--- Uses a WHILE loop to perform a calculation (factorial of 5).
-
 SET SERVEROUTPUT ON;
 
 DECLARE
@@ -8,7 +5,7 @@ DECLARE
     v_result  NUMBER := 1;
 BEGIN
     DBMS_OUTPUT.PUT_LINE('Calculating 5! using WHILE Loop...');
-    
+
     WHILE v_counter > 0 LOOP
         v_result := v_result * v_counter;
         v_counter := v_counter - 1;

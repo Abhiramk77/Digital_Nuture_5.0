@@ -1,13 +1,8 @@
 package com.digitalnurture.dsa.linkedlist.circular;
 
-/**
- * Circular Linked List implementation in Java.
- * Last node references head to form a loop.
- */
 public class CircularLinkedList {
     private Node head;
 
-    // Node structure
     private static class Node {
         int data;
         Node next;
@@ -18,14 +13,11 @@ public class CircularLinkedList {
         }
     }
 
-    /**
-     * Inserts a new node at the end.
-     */
     public void insert(int data) {
         Node newNode = new Node(data);
         if (head == null) {
             head = newNode;
-            newNode.next = head; // Point to itself
+            newNode.next = head;
             return;
         }
         Node temp = head;
@@ -33,12 +25,9 @@ public class CircularLinkedList {
             temp = temp.next;
         }
         temp.next = newNode;
-        newNode.next = head; // complete the circle
+        newNode.next = head;
     }
 
-    /**
-     * Traverses the circular list.
-     */
     public void traverse() {
         if (head == null) {
             System.out.println("Circular List is empty.");
