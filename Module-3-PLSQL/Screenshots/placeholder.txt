@@ -1,2 +1,0 @@
-Please save the screenshots of PL/SQL scripts executions here.
-Ensure the filenames match the topic, e.g., Triggers_Run.png.

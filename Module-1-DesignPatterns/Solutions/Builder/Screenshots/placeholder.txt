@@ -1,2 +1,0 @@
-Please save the console output screenshot of Builder Main run here.
-Expected output log matches the text inside README.md under Example Output.

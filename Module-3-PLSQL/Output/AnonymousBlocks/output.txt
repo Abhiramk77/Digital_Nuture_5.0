@@ -1,6 +1,0 @@
-SQL> @Scripts/AnonymousBlocks/AnonymousBlocks.sql;
---- Anonymous Block Output ---
-Successfully queried employee database.
-Total Employee Count: 5
-
-PL/SQL procedure successfully completed.

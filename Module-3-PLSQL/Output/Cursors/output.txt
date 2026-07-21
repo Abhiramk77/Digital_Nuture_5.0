@@ -1,8 +1,0 @@
-SQL> @Scripts/Cursors/Cursors.sql;
---- High Earners (> $70,000) ---
-ID: 101 | Name: Abhi | Salary: $85000
-ID: 103 | Name: Jane | Salary: $75000
-ID: 104 | Name: Michael | Salary: $95000
-Total Rows Processed: 3
-
-PL/SQL procedure successfully completed.

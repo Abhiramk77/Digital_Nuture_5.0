@@ -1,9 +1,0 @@
-SQL> @Scripts/Variables/Variables.sql;
-Employee ID   : 101
-Employee Name : Abhi
-Base Salary   : $  85,000.00
-Tax Rate      : 5%
-Tax Deducted  : $   4,250.00
-Net Pay       : $  80,750.00
-
-PL/SQL procedure successfully completed.
