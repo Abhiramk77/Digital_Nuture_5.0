@@ -1,0 +1,37 @@
+# Compiled Java classes
+*.class
+
+# Ignored tooling artifacts
+.refact/
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Build directories
+target/
+build/
+out/
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+
+# IDE specific
+.settings/
+.project
+.classpath
+.factorypath

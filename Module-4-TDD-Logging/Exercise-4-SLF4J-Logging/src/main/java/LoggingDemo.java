@@ -1,0 +1,19 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class LoggingDemo {
+    private static final Logger logger = LoggerFactory.getLogger(LoggingDemo.class);
+
+    public void run() {
+        // TODO: Add validation for negative input in future.
+        logger.info("Application started");
+        logger.debug("Debug message for development");
+        logger.warn("Warning message generated");
+        try {
+            int value = 10 / 0;
+            logger.info("Value: {}", value);
+        } catch (ArithmeticException exception) {
+            logger.error("Error while dividing by zero", exception);
+        }
+    }
+}
