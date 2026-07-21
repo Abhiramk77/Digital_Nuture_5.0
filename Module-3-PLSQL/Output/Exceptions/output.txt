@@ -1,0 +1,7 @@
+SQL> @Scripts/Exceptions/Exceptions.sql;
+--- Exception Handling Demo ---
+System Exception Caught: Employee 999 not found.
+Checking employee Sarah salary: $50000
+Custom Exception Caught: salary of $50000 is below the minimum FSE threshold ($55,000).
+
+PL/SQL procedure successfully completed.

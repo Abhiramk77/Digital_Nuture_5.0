@@ -1,0 +1,6 @@
+SQL> @Scripts/IF_ELSE/IF_ELSE.sql;
+Employee   : Jane
+Salary     : $75000
+Band Rank  : Medium Salary
+
+PL/SQL procedure successfully completed.

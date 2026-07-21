@@ -1,0 +1,8 @@
+SQL> @Scripts/LOOP/LOOP.sql;
+--- Basic LOOP Execution ---
+Counter value: 1
+Counter value: 2
+Counter value: 3
+Counter value: 4
+
+PL/SQL procedure successfully completed.
