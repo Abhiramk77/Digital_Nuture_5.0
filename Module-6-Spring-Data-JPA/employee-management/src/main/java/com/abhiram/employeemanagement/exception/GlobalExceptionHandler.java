@@ -8,7 +8,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,51 +15,41 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    // Handles employee not found errors
+    // Handle employee not found
     @ExceptionHandler(EmployeeNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleEmployeeNotFound(EmployeeNotFoundException ex) {
-        log.error("Employee not found: {}", ex.getMessage());
-        return buildErrorResponse(ex.getMessage(), HttpStatus.NOT_FOUND);
+    public ResponseEntity<Map<String, String>> handleNotFound(EmployeeNotFoundException ex) {
+        log.error("Error: {}", ex.getMessage());
+        Map<String, String> errorMap = new HashMap<>();
+        errorMap.put("error", ex.getMessage());
+        return new ResponseEntity<>(errorMap, HttpStatus.NOT_FOUND);
     }
 
-    // Handles duplicate email errors
+    // Handle duplicate email
     @ExceptionHandler(DuplicateEmailException.class)
-    public ResponseEntity<Map<String, Object>> handleDuplicateEmail(DuplicateEmailException ex) {
-        log.error("Duplicate email: {}", ex.getMessage());
-        return buildErrorResponse(ex.getMessage(), HttpStatus.CONFLICT);
+    public ResponseEntity<Map<String, String>> handleDuplicateEmail(DuplicateEmailException ex) {
+        log.error("Error: {}", ex.getMessage());
+        Map<String, String> errorMap = new HashMap<>();
+        errorMap.put("error", ex.getMessage());
+        return new ResponseEntity<>(errorMap, HttpStatus.CONFLICT);
     }
 
-    // Handles @Valid validation failures - returns field-level error messages
+    // Handle validation errors
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, Object>> handleValidationErrors(MethodArgumentNotValidException ex) {
-        Map<String, String> fieldErrors = new HashMap<>();
-        for (FieldError error : ex.getBindingResult().getFieldErrors()) {
-            fieldErrors.put(error.getField(), error.getDefaultMessage());
+    public ResponseEntity<Map<String, String>> handleValidation(MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
+            errors.put(fieldError.getField(), fieldError.getDefaultMessage());
         }
-
-        Map<String, Object> response = new HashMap<>();
-        response.put("timestamp", LocalDateTime.now().toString());
-        response.put("status", HttpStatus.BAD_REQUEST.value());
-        response.put("error", "Validation Failed");
-        response.put("details", fieldErrors);
-
-        log.warn("Validation errors: {}", fieldErrors);
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        log.warn("Validation error: {}", errors);
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
-    // Catch-all for any unexpected exceptions
+    // Handle all other general exceptions
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<Map<String, Object>> handleGenericException(Exception ex) {
-        log.error("Unexpected error: {}", ex.getMessage());
-        return buildErrorResponse("Something went wrong. Please try again later.", HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
-    private ResponseEntity<Map<String, Object>> buildErrorResponse(String message, HttpStatus status) {
-        Map<String, Object> error = new HashMap<>();
-        error.put("timestamp", LocalDateTime.now().toString());
-        error.put("status", status.value());
-        error.put("error", status.getReasonPhrase());
-        error.put("message", message);
-        return new ResponseEntity<>(error, status);
+    public ResponseEntity<Map<String, String>> handleGeneral(Exception ex) {
+        log.error("Server error: {}", ex.getMessage());
+        Map<String, String> errorMap = new HashMap<>();
+        errorMap.put("error", "An internal error occurred: " + ex.getMessage());
+        return new ResponseEntity<>(errorMap, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
