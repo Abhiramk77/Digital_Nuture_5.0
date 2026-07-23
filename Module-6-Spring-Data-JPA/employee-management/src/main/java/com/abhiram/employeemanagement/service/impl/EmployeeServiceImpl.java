@@ -7,6 +7,7 @@ import com.abhiram.employeemanagement.exception.EmployeeNotFoundException;
 import com.abhiram.employeemanagement.repository.EmployeeRepository;
 import com.abhiram.employeemanagement.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -20,19 +21,16 @@ import java.util.Optional;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private final EmployeeRepository employeeRepository;
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
-
+    // 1. Add Employee
     @Override
     public Employee addEmployee(EmployeeDTO dto) {
-        log.info("Adding employee: {}", dto.getEmail());
+        log.info("Adding employee with email: {}", dto.getEmail());
 
-        // Check if email already exists
-        Optional<Employee> check = employeeRepository.findByEmail(dto.getEmail());
-        if (check.isPresent()) {
+        Optional<Employee> checkEmail = employeeRepository.findByEmail(dto.getEmail());
+        if (checkEmail.isPresent()) {
             throw new DuplicateEmailException(dto.getEmail());
         }
 
@@ -45,32 +43,28 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.save(emp);
     }
 
+    // 2. View All Employees
     @Override
     public List<Employee> getAllEmployees() {
-        log.info("Fetching all employees");
+        log.info("Getting all employees");
         return employeeRepository.findAll();
     }
 
+    // 3. View Employee by ID
     @Override
     public Employee getEmployeeById(Long id) {
-        log.info("Fetching employee ID: {}", id);
-        Optional<Employee> empOpt = employeeRepository.findById(id);
-        if (!empOpt.isPresent()) {
-            throw new EmployeeNotFoundException(id);
-        }
-        return empOpt.get();
+        log.info("Getting employee by id: {}", id);
+        return employeeRepository.findById(id)
+                .orElseThrow(() -> new EmployeeNotFoundException(id));
     }
 
+    // 4. Update Employee
     @Override
     public Employee updateEmployee(Long id, EmployeeDTO dto) {
-        log.info("Updating employee ID: {}", id);
+        log.info("Updating employee with id: {}", id);
 
-        Optional<Employee> empOpt = employeeRepository.findById(id);
-        if (!empOpt.isPresent()) {
-            throw new EmployeeNotFoundException(id);
-        }
-
-        Employee emp = empOpt.get();
+        Employee emp = employeeRepository.findById(id)
+                .orElseThrow(() -> new EmployeeNotFoundException(id));
 
         emp.setName(dto.getName());
         emp.setEmail(dto.getEmail());
@@ -80,47 +74,39 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.save(emp);
     }
 
+    // 5. Delete Employee
     @Override
     public void deleteEmployee(Long id) {
-        log.info("Deleting employee ID: {}", id);
+        log.info("Deleting employee with id: {}", id);
 
-        Optional<Employee> empOpt = employeeRepository.findById(id);
-        if (!empOpt.isPresent()) {
-            throw new EmployeeNotFoundException(id);
-        }
+        Employee emp = employeeRepository.findById(id)
+                .orElseThrow(() -> new EmployeeNotFoundException(id));
 
-        employeeRepository.deleteById(id);
+        employeeRepository.delete(emp);
     }
 
+    // 6. Search Employee by Department
     @Override
     public List<Employee> getEmployeesByDepartment(String department) {
-        log.info("Fetching department: {}", department);
-        return employeeRepository.findByDepartmentIgnoreCase(department);
+        log.info("Searching department: {}", department);
+        return employeeRepository.findByDepartment(department);
     }
 
+    // Custom query search by name
     @Override
     public List<Employee> searchByName(String name) {
         log.info("Searching name: {}", name);
         return employeeRepository.searchByName(name);
     }
 
+    // 7 & 8. Pagination and Sorting
     @Override
     public Page<Employee> getEmployeesWithPagination(int page, int size, String sortBy, String direction) {
-        log.info("Fetching page: {}", page);
+        log.info("Fetching page {} sorted by {}", page, sortBy);
 
-        Sort sort = Sort.by(sortBy).ascending();
-        if (direction.equalsIgnoreCase("desc")) {
-            sort = Sort.by(sortBy).descending();
-        }
-
+        Sort sort = direction.equalsIgnoreCase("desc") ? Sort.by(sortBy).descending() : Sort.by(sortBy).ascending();
         Pageable pageable = PageRequest.of(page, size, sort);
-        return employeeRepository.findAll(pageable);
-    }
 
-    @Override
-    public Page<Employee> getEmployeesByDepartmentPaged(String department, int page, int size) {
-        log.info("Fetching department page: {}", page);
-        Pageable pageable = PageRequest.of(page, size);
-        return employeeRepository.findByDepartmentIgnoreCase(department, pageable);
+        return employeeRepository.findAll(pageable);
     }
 }

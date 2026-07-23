@@ -22,9 +22,5 @@ public interface EmployeeService {
 
     List<Employee> searchByName(String name);
 
-    // Pagination + sorting
     Page<Employee> getEmployeesWithPagination(int page, int size, String sortBy, String direction);
-
-    // Paginated search by department
-    Page<Employee> getEmployeesByDepartmentPaged(String department, int page, int size);
 }

@@ -1,29 +1,27 @@
 package com.abhiram.employeemanagement.dto;
 
-import jakarta.validation.constraints.*;
-import lombok.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-// DTO used for creating and updating employees
-// Keeps the API contract separate from the entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class EmployeeDTO {
 
-    @NotBlank(message = "Name is required")
-    @Size(min = 2, max = 100, message = "Name must be between 2 and 100 characters")
+    @NotBlank(message = "Name cannot be empty")
     private String name;
 
-    @NotBlank(message = "Email is required")
-    @Email(message = "Please enter a valid email")
+    @NotBlank(message = "Email cannot be empty")
+    @Email(message = "Email should be valid")
     private String email;
 
-    @NotBlank(message = "Department is required")
+    @NotBlank(message = "Department cannot be empty")
     private String department;
 
-    @NotNull(message = "Salary cannot be null")
-    @DecimalMin(value = "0.0", inclusive = false, message = "Salary must be a positive value")
+    @NotNull(message = "Salary is required")
     private Double salary;
 }
