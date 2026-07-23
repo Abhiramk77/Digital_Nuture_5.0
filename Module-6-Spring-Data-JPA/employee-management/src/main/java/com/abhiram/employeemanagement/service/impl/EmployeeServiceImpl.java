@@ -12,7 +12,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,13 +27,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    @Transactional
     public Employee addEmployee(EmployeeDTO dto) {
-        log.info("Adding employee with email: {}", dto.getEmail());
+        log.info("Adding employee: {}", dto.getEmail());
 
-        // Check duplicate email using simple if condition
-        Optional<Employee> existingOpt = employeeRepository.findByEmail(dto.getEmail());
-        if (existingOpt.isPresent()) {
+        // Check if email already exists
+        Optional<Employee> check = employeeRepository.findByEmail(dto.getEmail());
+        if (check.isPresent()) {
             throw new DuplicateEmailException(dto.getEmail());
         }
 
@@ -48,42 +46,31 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<Employee> getAllEmployees() {
-        log.info("Getting all employees list");
+        log.info("Fetching all employees");
         return employeeRepository.findAll();
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Employee getEmployeeById(Long id) {
-        log.info("Getting employee with id: {}", id);
+        log.info("Fetching employee ID: {}", id);
         Optional<Employee> empOpt = employeeRepository.findById(id);
-        if (empOpt.isEmpty()) {
+        if (!empOpt.isPresent()) {
             throw new EmployeeNotFoundException(id);
         }
         return empOpt.get();
     }
 
     @Override
-    @Transactional
     public Employee updateEmployee(Long id, EmployeeDTO dto) {
-        log.info("Updating employee with id: {}", id);
+        log.info("Updating employee ID: {}", id);
 
         Optional<Employee> empOpt = employeeRepository.findById(id);
-        if (empOpt.isEmpty()) {
+        if (!empOpt.isPresent()) {
             throw new EmployeeNotFoundException(id);
         }
 
         Employee emp = empOpt.get();
-
-        // Check duplicate email if changed
-        if (!emp.getEmail().equalsIgnoreCase(dto.getEmail())) {
-            Optional<Employee> emailCheck = employeeRepository.findByEmail(dto.getEmail());
-            if (emailCheck.isPresent()) {
-                throw new DuplicateEmailException(dto.getEmail());
-            }
-        }
 
         emp.setName(dto.getName());
         emp.setEmail(dto.getEmail());
@@ -94,37 +81,35 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    @Transactional
     public void deleteEmployee(Long id) {
-        log.info("Deleting employee with id: {}", id);
+        log.info("Deleting employee ID: {}", id);
+
         Optional<Employee> empOpt = employeeRepository.findById(id);
-        if (empOpt.isEmpty()) {
+        if (!empOpt.isPresent()) {
             throw new EmployeeNotFoundException(id);
         }
-        employeeRepository.delete(empOpt.get());
+
+        employeeRepository.deleteById(id);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<Employee> getEmployeesByDepartment(String department) {
-        log.info("Finding employees in department: {}", department);
+        log.info("Fetching department: {}", department);
         return employeeRepository.findByDepartmentIgnoreCase(department);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<Employee> searchByName(String name) {
-        log.info("Searching employees with name: {}", name);
+        log.info("Searching name: {}", name);
         return employeeRepository.searchByName(name);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Page<Employee> getEmployeesWithPagination(int page, int size, String sortBy, String direction) {
-        log.info("Getting page {} of employees sorted by {}", page, sortBy);
+        log.info("Fetching page: {}", page);
 
         Sort sort = Sort.by(sortBy).ascending();
-        if ("desc".equalsIgnoreCase(direction)) {
+        if (direction.equalsIgnoreCase("desc")) {
             sort = Sort.by(sortBy).descending();
         }
 
@@ -133,9 +118,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Page<Employee> getEmployeesByDepartmentPaged(String department, int page, int size) {
-        log.info("Getting page {} of department {}", page, department);
+        log.info("Fetching department page: {}", page);
         Pageable pageable = PageRequest.of(page, size);
         return employeeRepository.findByDepartmentIgnoreCase(department, pageable);
     }
